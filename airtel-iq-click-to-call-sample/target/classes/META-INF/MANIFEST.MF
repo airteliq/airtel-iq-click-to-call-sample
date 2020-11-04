@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: b0201023
+Build-Jdk: 10.0.2
+Implementation-Title: airtel-iq-click-to-call-sample
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.airtel.iq
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/airtel-iq-click-to-call-sample
+Created-By: Maven Integration for Eclipse
+

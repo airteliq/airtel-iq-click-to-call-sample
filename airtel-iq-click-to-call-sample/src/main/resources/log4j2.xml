@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="300">
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n" />
+		</Console>
+		<RollingFile name="AppFile"
+			fileName="/app/online/airtel-iq/logs/airtel-iq-app.log"
+			filePattern="/app/online/airtel-iq/logs/archive/airtel-iq-app-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<pattern>%d [%t] %p %c - %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="500 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="100" />
+		</RollingFile>
+
+		<RollingFile name="ConsoleLogs"
+			fileName="/app/online/airtel-iq/logs/airtel-iq-console.log"
+			filePattern="/app/online/airtel-iq/logs/archive/airtel-iq-console-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<pattern>%d [%t] %p %c - %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="500 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="100" />
+		</RollingFile>
+
+		<RollingRandomAccessFile name="SmartAuditFile"
+			fileName="/app/online/airtel-iq/logs/audit/airtel-iq-smart-audit.log"
+			filePattern="/app/online/airtel-iq/logs/audit/airtel-iq-smart-audit-%d{yyyy-MM-dd}-%i.log"
+			immediateFlush="false">
+			<PatternLayout>
+				<pattern>%m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="500 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="100" />
+		</RollingRandomAccessFile>
+
+ <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<encoder>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <!--<logger name="org.apache.kafka" level="WARN"/>-->
+    <!--<logger name="org.apache.kafka.common.metrics" level="WARN"/>-->
+    <!--<root level="warn">-->
+        <!--<appender-ref ref="STDOUT" />-->
+    <!--</root>-->
+
+
+	</Appenders>
+
+	<Loggers>
+		Root logger will be used only to have loggers for third party
+		libraries.
+
+
+		This logger will be used to print logs from
+		com.airtel.online package
+        <AsyncLogger name="com.airtel" level="DEBUG" additivity="false">
+			<AppenderRef ref="AppFile" />
+		</AsyncLogger>
+
+
+		<Root level="INFO">
+			<AppenderRef ref="ConsoleLogs" level="INFO" />
+		</Root>
+
+		<AsyncLogger
+			name="com.airtel.smartapi.logging.core.logger.impl.DefaultAuditLogger"
+			level="INFO" additivity="false">
+			<AppenderRef ref="SmartAuditFile" />
+		</AsyncLogger>
+
+
+	</Loggers>
+</Configuration>
+
